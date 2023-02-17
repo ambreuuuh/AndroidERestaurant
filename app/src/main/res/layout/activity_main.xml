@@ -7,157 +7,89 @@
     android:visibility="visible"
     tools:context=".MainActivity">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar2"
-        android:layout_width="410dp"
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@color/yellow"
-        android:minHeight="?attr/actionBarSize"
-        android:theme="?attr/actionBarTheme"
+        android:layout_marginBottom="216dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:logo="?attr/actionModeCloseDrawable" />
+        app:srcCompat="@drawable/homepicture2" />
 
     <ImageView
-        android:id="@+id/iamgehome"
-        android:layout_width="85dp"
-        android:layout_height="77dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="148dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/plateausushi" />
-
-    <ImageView
-        android:id="@+id/imagehome2"
-        android:layout_width="106dp"
-        android:layout_height="135dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="135dp"
-        app:layout_constraintEnd_toStartOf="@+id/imagehome3"
-        app:layout_constraintStart_toEndOf="@+id/iamgehome"
-        app:layout_constraintTop_toTopOf="@+id/toolbar2"
-        app:srcCompat="@drawable/les_sushis_font_ils_grossir_15005_orig" />
-
-    <ImageView
-        android:id="@+id/imagehome3"
-        android:layout_width="120dp"
-        android:layout_height="140dp"
-        android:layout_marginTop="128dp"
-        android:layout_marginEnd="4dp"
+        android:id="@+id/imageView7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/le_guide_ultime_pour_faire_ses_sushis_maison" />
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mainbutton"
+        app:srcCompat="@drawable/cuisine" />
 
     <Button
         android:id="@+id/starterbutton"
         android:layout_width="0dp"
         android:layout_height="100dp"
-        android:backgroundTint="@color/clear"
+        android:backgroundTint="@color/yellow"
         android:text="@string/starter"
         android:textAlignment="textStart"
-        android:textColor="@color/yellow"
+        android:textColor="@color/white"
         android:textStyle="bold"
         android:visibility="visible"
+        app:cornerRadius="50dp"
         app:layout_constraintBottom_toTopOf="@+id/mainbutton"
         app:layout_constraintEnd_toEndOf="@+id/mainbutton"
         app:layout_constraintStart_toStartOf="@+id/mainbutton" />
-
-    <ImageView
-        android:id="@+id/imageentree"
-        android:layout_width="85dp"
-        android:layout_height="77dp"
-        android:layout_marginEnd="20dp"
-        app:layout_constraintEnd_toStartOf="@+id/imageentree2"
-        tools:layout_editor_absoluteY="291dp"
-        tools:srcCompat="@tools:sample/avatars" />
-
-    <ImageView
-        android:id="@+id/imageentree2"
-        android:layout_width="85dp"
-        android:layout_height="77dp"
-        android:layout_marginEnd="40dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        tools:layout_editor_absoluteY="291dp"
-        tools:srcCompat="@tools:sample/avatars" />
 
     <Button
         android:id="@+id/mainbutton"
         android:layout_width="0dp"
         android:layout_height="100dp"
-        android:backgroundTint="@color/clear"
+        android:backgroundTint="@color/yellow"
         android:text="@string/main"
         android:textAlignment="textStart"
-        android:textColor="@color/yellow"
+        android:textColor="@color/white"
         android:textStyle="bold"
+        app:cornerRadius="50dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.6" />
 
-    <ImageView
-        android:id="@+id/imageplat"
-        android:layout_width="85dp"
-        android:layout_height="77dp"
-        android:layout_marginEnd="20dp"
-        app:layout_constraintEnd_toStartOf="@+id/imageplat2"
-        tools:layout_editor_absoluteY="390dp"
-        tools:srcCompat="@tools:sample/avatars" />
-
-    <ImageView
-        android:id="@+id/imageplat2"
-        android:layout_width="85dp"
-        android:layout_height="77dp"
-        android:layout_marginEnd="40dp"
-        app:layout_constraintEnd_toEndOf="@+id/mainbutton"
-        tools:layout_editor_absoluteY="390dp"
-        tools:srcCompat="@tools:sample/avatars" />
-
     <Button
         android:id="@+id/endbutton"
         android:layout_width="0dp"
         android:layout_height="100dp"
-        android:backgroundTint="@color/clear"
+        android:backgroundTint="@color/yellow"
         android:text="@string/end"
         android:textAlignment="textStart"
-        android:textColor="@color/yellow"
+        android:textColor="@color/white"
         android:textStyle="bold"
+        app:cornerRadius="50dp"
         app:layout_constraintEnd_toEndOf="@+id/mainbutton"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/mainbutton"
         app:layout_constraintTop_toBottomOf="@+id/mainbutton" />
 
-    <ImageView
-        android:id="@+id/imagedessert"
-        android:layout_width="85dp"
-        android:layout_height="77dp"
-        android:layout_marginEnd="20dp"
-        app:layout_constraintEnd_toStartOf="@+id/imagedessert2"
-        tools:layout_editor_absoluteY="492dp"
-        tools:srcCompat="@tools:sample/avatars" />
-
-    <ImageView
-        android:id="@+id/imagedessert2"
-        android:layout_width="85dp"
-        android:layout_height="77dp"
-        android:layout_marginEnd="40dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        tools:layout_editor_absoluteY="492dp"
-        tools:srcCompat="@tools:sample/avatars" />
-
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="75dp"
+        android:layout_marginTop="20dp"
+        android:background="@color/yellowclear"
+        android:backgroundTint="#FFE79E"
         android:text="AndroidERestaurant"
         android:textColor="@color/yellow"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/toolbar2" />
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

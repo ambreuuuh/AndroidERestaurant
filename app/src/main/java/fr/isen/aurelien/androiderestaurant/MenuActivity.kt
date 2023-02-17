@@ -5,8 +5,9 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.android.volley.Request.Method
+import com.android.volley.Request
 import com.android.volley.toolbox.JsonObjectRequest
+import com.android.volley.toolbox.Volley
 import com.google.gson.GsonBuilder
 
 import fr.isen.aurelien.androiderestaurant.databinding.ActivityMenuBinding
@@ -29,10 +30,6 @@ class MenuActivity : AppCompatActivity() {
         binding = ActivityMenuBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.recyclerView.layoutManager = LinearLayoutManager(this)
-        binding.recyclerView.adapter = CustomAdapter(listOf()) {
-
-        }
 
         val category = intent.getSerializableExtra(extraKey) as? Category   //as optionnel, essaye de le caster en Category
         currentcategory=category ?: Category.STARTER
@@ -41,25 +38,12 @@ class MenuActivity : AppCompatActivity() {
         makeRequest()
     }
 
-    private fun parseData(data: String){
-        val result = GsonBuilder().create().fromJson(data, MenuResult::class.java)
-        val category = result.data.first {it.name == categoryFilterKey()}
-        showDatas(category)
-    }
-    private fun showDatas(category: fr.isen.aurelien.androiderestaurant.network.Category){
-        binding.recyclerView.layoutManager = LinearLayoutManager(this)
-        binding.recyclerView.adapter = CustomAdapter(category.items) {
-            val intent = Intent(this, DetailActivity::class.java)
-            startActivity(intent)
-
-        }
-    }
-
     private fun makeRequest(){
+        val queue = Volley.newRequestQueue(this)
         val params = JSONObject()
         params.put(NetworkConstants.idShopKey, 1)
         val request = JsonObjectRequest(
-            Method.POST,
+            Request.Method.POST,
             NetworkConstants.url,
             params,
             {result ->
@@ -73,13 +57,34 @@ class MenuActivity : AppCompatActivity() {
 
             }
         )
+        queue.add(request)
         //show datas
     }
 
+    private fun parseData(data: String){
+        val result = GsonBuilder().create().fromJson(data, MenuResult::class.java)
+        val category = result.data.first {
+            it.name == categoryFilterKey()
+        }
+        showDatas(category)
+    }
+    private fun showDatas(category: fr.isen.aurelien.androiderestaurant.network.Category){
+        binding.recyclerView.layoutManager = LinearLayoutManager(this)
+        binding.recyclerView.adapter = CustomAdapter(category.items) {
+            val intent = Intent(this, DetailActivity::class.java)
+            startActivity(intent)
 
-
+        }
+    }
 
     private fun categoryName(): String{
+        return when(currentcategory){
+            Category.STARTER -> getString(R.string.starter)
+            Category.MAIN -> getString(R.string.main)
+            Category.END -> getString(R.string.end)
+        }
+    }
+    private fun categoryFilterKey(): String{
         return when(currentcategory){
             Category.STARTER -> getString(R.string.starter)
             Category.MAIN -> getString(R.string.main)
@@ -108,11 +113,5 @@ class MenuActivity : AppCompatActivity() {
     }
 
 
-    private fun categoryFilterKey(): String{
-        return when(currentcategory){
-            Category.STARTER -> getString(R.string.starter)
-            Category.MAIN -> getString(R.string.main)
-            Category.END -> getString(R.string.end)
-        }
-    }
+
 }

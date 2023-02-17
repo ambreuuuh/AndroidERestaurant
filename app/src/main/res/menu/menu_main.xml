@@ -7,4 +7,14 @@
         android:orderInCategory="100"
         android:title="@string/action_settings"
         app:showAsAction="never" />
+
+    <item
+        android:id="@+id/cart_icon"
+        android:title="Pannier"
+        android:icon="@drawable/baseline_shopping_cart_24"
+        app:showAsAction="always" />
+
+
+
+
 </menu>
