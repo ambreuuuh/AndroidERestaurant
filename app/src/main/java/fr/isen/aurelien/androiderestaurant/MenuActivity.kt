@@ -30,11 +30,18 @@ class MenuActivity : AppCompatActivity() {
         binding = ActivityMenuBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-
+        val recyclerView= binding.recyclerView
         val category = intent.getSerializableExtra(extraKey) as? Category   //as optionnel, essaye de le caster en Category
         currentcategory=category ?: Category.STARTER
         supportActionBar?.title = categoryName()
         // if category == null {category = STARTER }
+
+        recyclerView.adapter = CustomAdapter(arrayListOf()){
+            val intent = Intent(this, BasketActivity::class.java)
+            intent.putExtra("item", it)
+            startActivity(intent)
+        }
+
         makeRequest()
     }
 
@@ -72,6 +79,7 @@ class MenuActivity : AppCompatActivity() {
         binding.recyclerView.layoutManager = LinearLayoutManager(this)
         binding.recyclerView.adapter = CustomAdapter(category.items) {
             val intent = Intent(this, DetailActivity::class.java)
+            intent.putExtra(DetailActivity.PLATE_EXTRA, it)
             startActivity(intent)
 
         }
@@ -92,6 +100,8 @@ class MenuActivity : AppCompatActivity() {
         }
     }
 
+
+/*
     override fun onStart() {
         super.onStart()
         Log.d("LifeCycle", "MenuActivity onStart")
@@ -112,6 +122,6 @@ class MenuActivity : AppCompatActivity() {
         super.onDestroy()
     }
 
-
+*/
 
 }

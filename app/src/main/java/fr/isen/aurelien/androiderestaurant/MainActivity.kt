@@ -21,6 +21,25 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         buttonsListener()
+
+        Log.d("lifeCycle", "MainActivity onCreate")
+    }
+
+    override fun onStart(){
+        super.onStart()
+        Log.d("lifeCycle", "MainActivity onStart")
+    }
+    override fun onResume(){
+        super.onResume()
+        Log.d("lifeCycle", "MainActivity onResume")
+    }
+    override fun onPause(){
+        super.onPause()
+        Log.d("lifeCycle", "MainActivity onPause")
+    }
+    override fun onDestroy(){
+        super.onDestroy()
+        Log.d("lifeCycle", "MainActivity onDestroy")
     }
     private fun buttonsListener() {
         binding.starterbutton.setOnClickListener {
