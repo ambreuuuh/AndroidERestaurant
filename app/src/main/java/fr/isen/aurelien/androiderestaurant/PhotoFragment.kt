@@ -25,7 +25,8 @@ class PhotoFragment :Fragment(){
         savedInstanceState: Bundle?
     ): View?{
         binding = FragmentPhotoBinding.inflate(inflater, container, false)
-        Picasso.get().load(image).into(binding.imageView2)
+        if(image?.isNotEmpty()==true){
+        Picasso.get().load(image).into(binding.imageView2)}
         return binding.root
     }
 
