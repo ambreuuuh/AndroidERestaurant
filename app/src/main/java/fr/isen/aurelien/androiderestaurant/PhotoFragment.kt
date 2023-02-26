@@ -13,6 +13,7 @@ class PhotoFragment :Fragment(){
     private var image: String? = null
     lateinit var binding: FragmentPhotoBinding
 
+
     override fun onCreate(savedInstanceState: Bundle?){
         super.onCreate(savedInstanceState)
         arguments?.let{

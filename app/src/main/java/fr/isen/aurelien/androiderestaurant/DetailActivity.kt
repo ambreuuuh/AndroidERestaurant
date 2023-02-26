@@ -1,8 +1,10 @@
 package fr.isen.aurelien.androiderestaurant
 
+
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
@@ -11,6 +13,7 @@ import com.google.android.material.snackbar.Snackbar
 import com.google.gson.Gson
 import fr.isen.aurelien.androiderestaurant.databinding.ActivityDetailBinding
 import fr.isen.aurelien.androiderestaurant.network.Plate
+import fr.isen.aurelien.androiderestaurant.network.Price
 import org.json.JSONArray
 import org.json.JSONObject
 import java.io.File
@@ -23,7 +26,7 @@ class DetailActivity: AppCompatActivity() {
     lateinit var binding: ActivityDetailBinding
     var plate: Plate? = null
     private var count =0
-    val price = plate?.prices?.map { it.price }?.joinToString()
+    //private val price = plate?.prices?.map { it.price[0] }?.toString()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,12 +34,17 @@ class DetailActivity: AppCompatActivity() {
         setContentView(binding.root)
 
         plate = intent.getSerializableExtra(PLATE_EXTRA) as? Plate
-
+        binding.titlemeal.text = plate?.name
+        val price = plate?.prices?.map { it.price }?.joinToString(",") ?: ""
         val ingredients = plate?.ingredients?.map { it.name }?.joinToString(",") ?: ""
         binding.ingredients.text = ingredients
 
+
         plate?.let {
-            //binding.viewPager2.adapter = PhotoAdapter(it.images, this)
+           // binding.viewPager2.adapter = PhotoAdapter(it.images, this)
+            //val viewPager = binding.viewPager2
+            //val adapter = PhotoAdapter(it.images)
+            //viewPager.adapter= adapter
         }
 
         binding.minus.setOnClickListener{
@@ -44,7 +52,7 @@ class DetailActivity: AppCompatActivity() {
                 count--
                 binding.quantity.text= count.toString()
                 val newPrice = convertString(price)
-                val total = newPrice?.let{it1 -> multiply(it1,count)}
+                val total = calculateTotalPrice(newPrice,count)
                 binding.addCart.text= ("Add Cart: $total €").toString()
             }
         }
@@ -53,14 +61,14 @@ class DetailActivity: AppCompatActivity() {
             count++
             binding.quantity.text= count.toString()
             val newPrice = convertString(price)
-            val total = newPrice?.let{it1 -> multiply(it1,count)}
+            val total = calculateTotalPrice(newPrice,count)
             binding.addCart.text= ("Add Cart: $total €").toString()
 
         }
 
         binding.addCart.setOnClickListener{
             val newPrice = convertString(price)
-            val total = newPrice?.let{ it1 -> multiply(it1, count)}
+            val total = calculateTotalPrice(newPrice,count)
             if (count !=0){
                 val basketfile = mapOf("Nouvel ajout" to count.toString() + "" + plate?.name.toString() + " pour " + total.toString()+ "€")
                 val basketJson = Gson().toJson(basketfile)
@@ -94,7 +102,7 @@ class DetailActivity: AppCompatActivity() {
 
         binding.imgbasket.setOnClickListener{
             val newPrice= convertString(price)
-            val total= newPrice?.let{ it1 -> multiply(it1,count)}
+            val total= calculateTotalPrice(newPrice,count)
             val basketfile = mapOf("Nouvel ajout" to count.toString() + "" + plate?.name.toString() + " pour " + total.toString()+ "€")
             val basketJson = Gson().toJson(basketfile)
             val intent= Intent(this, BasketActivity::class.java)
@@ -104,25 +112,19 @@ class DetailActivity: AppCompatActivity() {
         }
     }
 
-    fun convertString(price: String?): Any?{
-        return try{
-            price?.toInt()
-        } catch (e: java.lang.NumberFormatException){
-            price?.toFloat()
+    private fun convertString(price: String?): Int {
+        if (price != null) {
+            return price.toInt()
+        }
+        else{
+            return 999
         }
     }
 
-    fun multiply(newPrice: Any, count: Int): Any{
-        return when (newPrice){
-            is Int -> {
-                newPrice * count
-            }
-            is Float -> {
-                newPrice * count
-            }
-            else -> {
-                "Impossible, not the same type"
-            }
-        }
+
+    private fun calculateTotalPrice(price: Int, count: Int): Int {
+        val totalPrice = price * count
+        return totalPrice
     }
+
 }

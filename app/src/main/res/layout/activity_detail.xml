@@ -39,7 +39,7 @@
     </androidx.viewpager.widget.ViewPager>
 
     <TextView
-        android:id="@+id/name"
+        android:id="@+id/titlemeal"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:textSize="24sp"
@@ -55,18 +55,7 @@
         android:layout_marginTop="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/name" />
-
-    <TextView
-        android:id="@+id/textViewprice"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:textAlignment="center"
-        android:textAllCaps="false"
-        app:layout_constraintEnd_toEndOf="@+id/ingredients"
-        app:layout_constraintStart_toStartOf="@+id/ingredients"
-        app:layout_constraintTop_toBottomOf="@+id/ingredients" />
+        app:layout_constraintTop_toBottomOf="@id/titlemeal" />
 
     <Button
         android:id="@+id/minus"
@@ -87,13 +76,13 @@
         android:id="@+id/quantity"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="40dp"
         android:gravity="center"
         android:text="0"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewprice" />
+        app:layout_constraintTop_toBottomOf="@+id/ingredients" />
 
 
 
